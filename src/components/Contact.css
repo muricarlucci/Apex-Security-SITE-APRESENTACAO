@@ -1,0 +1,175 @@
+/* ================================ CONTATO =============================== */
+
+.contact {
+  max-width: 780px;
+  margin-inline: auto;
+  padding: 40px 44px 44px;
+}
+
+/* O card de contato nao deve levantar no hover como os demais */
+.contact:hover {
+  transform: none;
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.contact__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+/* ------------------------------- Campos --------------------------------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field__label {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.field__input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(10, 10, 10, 0.65);
+  color: var(--text);
+  font-size: 0.95rem;
+  transition: border-color 0.22s var(--ease), background 0.22s var(--ease),
+    box-shadow 0.22s var(--ease);
+}
+
+.field__input::placeholder {
+  color: #5c5850;
+}
+
+.field__input:hover:not(:disabled) {
+  border-color: var(--border-strong);
+}
+
+.field__input:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(10, 10, 10, 0.9);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.14);
+}
+
+.field__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.field__input--area {
+  resize: vertical;
+  min-height: 148px;
+  line-height: 1.6;
+  font-family: var(--font-body);
+}
+
+/* ------------------------------- Acoes ---------------------------------- */
+
+.contact__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.contact__actions .btn:disabled {
+  opacity: 0.7;
+  cursor: progress;
+  transform: none;
+}
+
+.contact__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.83rem;
+  color: var(--text-dim);
+}
+
+.contact__spinner {
+  animation: contact-spin 0.8s linear infinite;
+}
+
+@keyframes contact-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ------------------------------ Feedback -------------------------------- */
+
+.contact__feedback {
+  font-size: 0.89rem;
+  line-height: 1.55;
+  min-height: 0;
+}
+
+.contact__feedback--idle,
+.contact__feedback--sending {
+  display: none;
+}
+
+.contact__feedback--success,
+.contact__feedback--error {
+  padding: 13px 16px;
+  border-radius: 10px;
+  border: 1px solid;
+}
+
+.contact__feedback--success {
+  border-color: rgba(63, 170, 107, 0.4);
+  background: rgba(63, 170, 107, 0.08);
+  color: #7fd0a3;
+}
+
+.contact__feedback--error {
+  border-color: rgba(224, 82, 82, 0.4);
+  background: rgba(224, 82, 82, 0.08);
+  color: #f09090;
+}
+
+/* ============================ RESPONSIVIDADE ============================ */
+
+@media (max-width: 700px) {
+  .contact {
+    padding: 30px 24px 32px;
+  }
+
+  .contact__row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact__actions .btn {
+    width: 100%;
+  }
+
+  .contact__hint {
+    justify-content: center;
+  }
+}

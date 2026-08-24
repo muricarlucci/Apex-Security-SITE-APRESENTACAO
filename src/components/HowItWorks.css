@@ -1,0 +1,114 @@
+/* ============================ COMO FUNCIONA ============================= */
+
+.flow {
+  position: relative;
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+/* Linha dourada contínua ligando os marcadores */
+.flow::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 27px;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--gold-dark) 8%,
+    var(--gold) 50%,
+    var(--gold-dark) 92%,
+    transparent 100%
+  );
+  opacity: 0.55;
+}
+
+.flow__step {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding-bottom: 34px;
+}
+
+.flow__step:last-child {
+  padding-bottom: 0;
+}
+
+.flow__marker {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 55px;
+  height: 55px;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: 0 0 0 6px var(--bg), 0 0 22px rgba(201, 168, 76, 0.12);
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.flow__step:hover .flow__marker {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 6px var(--bg), 0 0 30px rgba(201, 168, 76, 0.32);
+}
+
+.flow__number {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+
+.flow__body {
+  padding-top: 8px;
+  min-width: 0;
+}
+
+.flow__title {
+  font-size: 1.13rem;
+  margin-bottom: 6px;
+}
+
+.flow__text {
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+  max-width: 620px;
+}
+
+/* ============================ RESPONSIVIDADE ============================ */
+
+@media (max-width: 600px) {
+  .flow::before {
+    left: 22px;
+  }
+
+  .flow__step {
+    gap: 18px;
+    padding-bottom: 28px;
+  }
+
+  .flow__marker {
+    width: 45px;
+    height: 45px;
+    box-shadow: 0 0 0 5px var(--bg);
+  }
+
+  .flow__number {
+    font-size: 0.8rem;
+  }
+
+  .flow__body {
+    padding-top: 4px;
+  }
+
+  .flow__title {
+    font-size: 1.03rem;
+  }
+}

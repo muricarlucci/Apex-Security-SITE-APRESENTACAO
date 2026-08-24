@@ -1,0 +1,76 @@
+/* O elemento vive dentro de um wrapper limitado pelo container do hero,
+   entao precisa ser esticado ate a largura total da viewport. */
+.swoosh {
+  position: absolute;
+  top: calc(-1 * (var(--nav-h) + 52px));
+  bottom: -58px;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.swoosh__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Nucleo luminoso onde as trilhas convergem */
+.swoosh__horizon {
+  position: absolute;
+  left: 50%;
+  bottom: -34px;
+  width: min(1180px, 94vw);
+  height: 300px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse 50% 50% at 50% 100%,
+    rgba(255, 243, 208, 0.55) 0%,
+    rgba(232, 201, 122, 0.28) 20%,
+    rgba(201, 168, 76, 0.11) 44%,
+    rgba(139, 105, 20, 0.035) 66%,
+    transparent 80%
+  );
+  filter: blur(5px);
+}
+
+/* Brilho ambiente amplo, dando profundidade ao fundo preto */
+.swoosh__ambient {
+  position: absolute;
+  left: 50%;
+  bottom: -20%;
+  width: 160vw;
+  height: 105%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse 42% 58% at 50% 100%,
+    rgba(201, 168, 76, 0.14) 0%,
+    rgba(139, 105, 20, 0.05) 38%,
+    transparent 68%
+  );
+}
+
+/* Escurece as bordas e evita que as trilhas competam com o texto */
+.swoosh__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 62% 52% at 50% 46%, rgba(10, 10, 10, 0.7) 0%, transparent 72%),
+    linear-gradient(180deg, rgba(10, 10, 10, 0.9) 0%, transparent 20%);
+}
+
+@media (max-width: 768px) {
+  .swoosh {
+    top: calc(-1 * (var(--nav-h) + 24px));
+    bottom: -40px;
+  }
+
+  .swoosh__horizon {
+    height: 200px;
+    bottom: -24px;
+  }
+}

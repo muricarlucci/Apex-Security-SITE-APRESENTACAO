@@ -1,0 +1,395 @@
+/* ============================ NAVBAR EM PILULA =========================== */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding-block: 16px;
+  transition: padding 0.3s var(--ease), background 0.3s var(--ease);
+}
+
+.nav--scrolled {
+  padding-block: 10px;
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0) 100%);
+  backdrop-filter: blur(4px);
+}
+
+.nav__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 28px;
+}
+
+/* ------------------------------- Marca --------------------------------- */
+
+.nav__brand {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.25s var(--ease);
+}
+
+.nav__brand:hover {
+  opacity: 0.82;
+}
+
+.nav__logo {
+  width: auto;
+  height: 52px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 14px rgba(201, 168, 76, 0.25));
+  transition: height 0.3s var(--ease);
+}
+
+.nav--scrolled .nav__logo {
+  height: 44px;
+}
+
+/* ---------------------------- Pilula central ---------------------------- */
+
+.nav__pill {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(17, 17, 17, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(232, 201, 122, 0.07);
+}
+
+.nav__item {
+  position: relative;
+}
+
+/* O mega-menu se ancora na PILULA, nao no item "Plataforma".
+   Ancorado no item, o painel (660-760px) era centralizado num alvo que
+   desliza para a esquerda conforme a pilula encolhe — a 900px de viewport
+   ele vazava 71px para fora da tela. A pilula e sempre centralizada, entao
+   o painel tambem passa a ser, e cabe na tela em qualquer largura.
+   `position: static` aqui faz a `.nav__pill` (que tem transform, logo e
+   bloco de contencao) virar a referencia do `position: absolute` do painel. */
+.nav__item--has-menu {
+  position: static;
+}
+
+.nav__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 0.94rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.22s var(--ease), background 0.22s var(--ease);
+}
+
+.nav__link:hover,
+.nav__link.is-active {
+  color: var(--gold-light);
+  background: rgba(201, 168, 76, 0.08);
+}
+
+.nav__chevron {
+  transition: transform 0.22s var(--ease);
+  opacity: 0.7;
+}
+
+.nav__link.is-active .nav__chevron {
+  transform: rotate(180deg);
+}
+
+/* ------------------------------- Acoes ---------------------------------- */
+
+.nav__actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.nav__cta {
+  border-color: var(--gold-dark);
+  color: var(--gold-light);
+  background: transparent;
+}
+
+.nav__burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(17, 17, 17, 0.72);
+  backdrop-filter: blur(12px);
+  color: var(--gold-light);
+  transition: border-color 0.22s var(--ease);
+}
+
+.nav__burger:hover {
+  border-color: var(--gold);
+}
+
+/* ============================== MEGA-MENU =============================== */
+
+/* A centralizacao horizontal vem do `x: '-50%'` do framer-motion, nao do
+   CSS: o framer escreve `transform` inline e sobrescreveria um translate
+   declarado aqui. */
+.mega {
+  position: absolute;
+  /* 100% = altura da pilula (ver `.nav__item--has-menu` acima) */
+  top: calc(100% + 12px);
+  left: 50%;
+  width: min(760px, calc(100vw - 48px));
+  padding: 22px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+
+  /* Solido, sem alpha: o painel se abre exatamente sobre a headline do hero
+     e qualquer transparencia deixava o texto de tras legivel atraves dos
+     itens do menu. Com o fundo opaco, `backdrop-filter` nao teria efeito
+     algum — foi removido junto. */
+  background-color: #111111;
+
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(201, 168, 76, 0.05);
+}
+
+/* Ponte invisivel: mantem o hover ativo na travessia navbar -> painel */
+.mega::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -12px;
+  height: 12px;
+}
+
+.mega__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.mega__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 13px 14px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  transition: background 0.22s var(--ease), border-color 0.22s var(--ease);
+}
+
+.mega__item:hover {
+  background: rgba(201, 168, 76, 0.06);
+  border-color: var(--border-strong);
+}
+
+.mega__icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: rgba(201, 168, 76, 0.07);
+  color: var(--gold);
+  transition: color 0.22s var(--ease), border-color 0.22s var(--ease);
+}
+
+.mega__item:hover .mega__icon {
+  color: var(--gold-light);
+  border-color: var(--gold);
+}
+
+.mega__text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.mega__name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.mega__desc {
+  font-size: 0.83rem;
+  line-height: 1.45;
+  color: var(--text-dim);
+}
+
+.mega__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.mega__foot-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--gold);
+  transition: color 0.22s var(--ease);
+}
+
+.mega__foot-link:hover {
+  color: var(--gold-light);
+}
+
+/* ============================= MENU MOBILE ============================== */
+
+.mobile {
+  display: none;
+  margin: 14px 20px 0;
+  padding: 20px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  /* Solido pelo mesmo motivo do mega-menu: o painel cobre a headline do hero */
+  background-color: #0d0d0d;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.mobile__nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile__link {
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  transition: color 0.2s var(--ease);
+}
+
+.mobile__link:hover {
+  color: var(--gold-light);
+}
+
+.mobile__label {
+  margin: 22px 0 10px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.mobile__modules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.mobile__label {
+  grid-column: 1 / -1;
+}
+
+.mobile__module {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--gold);
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.mobile__module:hover {
+  border-color: var(--gold-dark);
+  background: rgba(201, 168, 76, 0.06);
+}
+
+/* ============================ RESPONSIVIDADE ============================ */
+
+@media (max-width: 1080px) {
+  .nav__pill {
+    gap: 0;
+    padding: 6px 8px;
+  }
+
+  .nav__link {
+    padding: 9px 13px;
+    font-size: 0.87rem;
+  }
+
+  .mega {
+    width: min(660px, calc(100vw - 40px));
+  }
+}
+
+@media (max-width: 900px) {
+  .nav__cta {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav__inner {
+    padding-inline: 20px;
+  }
+
+  .nav__pill {
+    display: none;
+  }
+
+  .nav__burger {
+    display: inline-flex;
+  }
+
+  .nav__logo {
+    height: 44px;
+  }
+
+  .mobile {
+    display: block;
+  }
+}
+
+@media (max-width: 420px) {
+  .mobile__modules {
+    grid-template-columns: 1fr;
+  }
+}

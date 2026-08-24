@@ -1,0 +1,114 @@
+/* ============================== PLATAFORMA ============================== */
+
+.modules {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.module {
+  padding: 28px 26px 30px;
+}
+
+.module__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: rgba(201, 168, 76, 0.07);
+  color: var(--gold);
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease),
+    background 0.3s var(--ease);
+}
+
+.module:hover .module__icon {
+  color: var(--gold-light);
+  border-color: var(--gold);
+  background: rgba(201, 168, 76, 0.12);
+}
+
+.module__name {
+  font-size: 1.2rem;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.module__short {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.module__rule {
+  margin-block: 18px;
+}
+
+.module__long {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+/* ---------------------------- Human-in-the-loop ------------------------- */
+
+.hitl {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 900px;
+  margin: 56px auto 0;
+  padding: 28px 32px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(120deg, rgba(201, 168, 76, 0.07) 0%, rgba(17, 17, 17, 0) 55%),
+    var(--card);
+}
+
+.hitl__icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  border: 1px solid var(--gold-dark);
+  background: rgba(201, 168, 76, 0.1);
+  color: var(--gold-light);
+}
+
+.hitl__title {
+  font-size: 1.15rem;
+  color: var(--gold-light);
+  margin-bottom: 7px;
+}
+
+.hitl__text {
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+
+/* ============================ RESPONSIVIDADE ============================ */
+
+@media (max-width: 1024px) {
+  .modules {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .modules {
+    grid-template-columns: 1fr;
+  }
+
+  .hitl {
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+  }
+}

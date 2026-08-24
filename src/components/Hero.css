@@ -1,0 +1,269 @@
+/* ================================= HERO ================================= */
+
+.hero {
+  position: relative;
+  padding-top: calc(var(--nav-h) + 52px);
+  padding-bottom: 90px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Palco do hero: define a caixa que as trilhas douradas preenchem.
+   O `isolation` cria um contexto de empilhamento proprio, de forma que o
+   `z-index: -1` do swoosh o mantenha atras do texto sem escapar da secao. */
+.hero__stage {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* ------------------------------ Headline -------------------------------- */
+
+.hero__title {
+  max-width: 940px;
+  font-size: clamp(2.6rem, 6.6vw, 5.1rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+/* O trecho de maior valor comercial, em dourado brilhante */
+.hero__title-accent {
+  background: linear-gradient(96deg, #b8933a 0%, var(--gold-light) 42%, #fff0c4 62%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 60px rgba(232, 201, 122, 0.25);
+}
+
+.hero__subtitle {
+  max-width: 660px;
+  margin-top: 26px;
+  color: var(--text-dim);
+  font-size: clamp(1rem, 1.4vw, 1.13rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+/* -------------------------------- CTAs ---------------------------------- */
+
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 38px;
+}
+
+/* --------------------------- Cards de destaque -------------------------- */
+
+.hero__features {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+  margin-top: 74px;
+}
+
+.hero__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(17, 17, 17, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-align: left;
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease),
+    background 0.3s var(--ease);
+}
+
+.hero__feature:hover {
+  border-color: var(--gold-dark);
+  background: rgba(21, 21, 21, 0.85);
+  transform: translateY(-4px);
+}
+
+.hero__feature-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  margin-top: 2px;
+  transition: color 0.3s var(--ease);
+}
+
+.hero__feature:hover .hero__feature-icon {
+  color: var(--gold-light);
+}
+
+.hero__feature-text {
+  min-width: 0;
+}
+
+.hero__feature-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: -0.01em;
+  margin-bottom: 5px;
+}
+
+.hero__feature-desc {
+  font-size: 0.845rem;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+/* -------------------------- Preview do dashboard ------------------------ */
+
+.hero__preview {
+  width: 100%;
+  margin-top: 72px;
+  perspective: 1600px;
+}
+
+.hero__frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  box-shadow:
+    0 0 0 1px rgba(201, 168, 76, 0.12),
+    0 0 70px rgba(201, 168, 76, 0.14),
+    0 40px 100px rgba(0, 0, 0, 0.75);
+  transition: box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+
+.hero__frame:hover {
+  border-color: var(--gold-dark);
+  box-shadow:
+    0 0 0 1px rgba(201, 168, 76, 0.2),
+    0 0 100px rgba(201, 168, 76, 0.22),
+    0 46px 110px rgba(0, 0, 0, 0.8);
+}
+
+/* Barra estilizada de janela de navegador */
+.hero__frame-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(13, 13, 13, 0.9);
+}
+
+.hero__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #2e2a1c;
+}
+
+.hero__dot:first-child {
+  background: rgba(201, 168, 76, 0.55);
+}
+
+.hero__frame-url {
+  margin-left: 14px;
+  padding: 4px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.7);
+  color: var(--text-dim);
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+}
+
+.hero__frame-shot {
+  position: relative;
+  display: block;
+  line-height: 0;
+}
+
+.hero__frame-shot img {
+  width: 100%;
+  height: auto;
+}
+
+.hero__frame-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  background: rgba(10, 10, 10, 0.62);
+  color: var(--gold-light);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+
+.hero__frame-shot:hover .hero__frame-overlay,
+.hero__frame-shot:focus-visible .hero__frame-overlay {
+  opacity: 1;
+}
+
+/* ============================ RESPONSIVIDADE ============================ */
+
+@media (max-width: 1024px) {
+  .hero__features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: calc(var(--nav-h) + 24px);
+    padding-bottom: 64px;
+  }
+
+  .hero__title {
+    letter-spacing: -0.025em;
+  }
+
+  .hero__ctas {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__ctas .btn {
+    width: 100%;
+  }
+
+  .hero__preview {
+    margin-top: 52px;
+  }
+
+  .hero__frame-url {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero__features {
+    grid-template-columns: 1fr;
+  }
+}

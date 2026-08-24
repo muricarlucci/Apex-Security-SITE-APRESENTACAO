@@ -36,7 +36,33 @@ O Vite sobe em `http://localhost:5173`.
 |---|---|
 | `npm run dev` | Servidor de desenvolvimento com HMR |
 | `npm run build` | Build de produção em `dist/` |
+| `npm run build:single` | Arquivo único autossuficiente em `dist-standalone/index.html` |
 | `npm run preview` | Serve o `dist/` localmente, para conferir o build |
+
+> **Abrir `index.html` da raiz com duplo clique dá tela branca — isso é esperado.**
+> Ele é só o ponto de entrada do Vite: aponta para `/src/main.jsx`, que é código-fonte React
+> que nenhum navegador executa direto. Use `npm run dev`, ou gere o arquivo único.
+
+### O arquivo único (`npm run build:single`)
+
+Produz um `dist-standalone/index.html` com CSS, JavaScript e **todas as imagens** embutidos —
+sem nenhum arquivo ao lado. Abre com duplo clique e pode ser publicado sozinho como site
+estático. Útil quando se quer entregar o site como um artefato só, sem etapa de build.
+
+Como funciona, em `scripts/build-standalone.mjs`:
+
+- o build roda em `--mode standalone`, que sobe o `assetsInlineLimit` (o Vite converte as
+  imagens importadas em data URI) e troca o formato de saída para `iife` — módulos ES externos
+  são bloqueados por CORS em `file://`, script clássico não é
+- o script embute o CSS e o JS, e converte os arquivos de `public/` em data URI
+- o bundle vai para o **fim do `<body>`**: `type="module"` é adiado por padrão, um `<script>`
+  inline não é, e no `<head>` ele procuraria `#root` antes de o body existir
+- as imagens de `public/` entram uma única vez num mapa `window.__APEX_ASSETS`, em vez de
+  repetir o data URI a cada referência (o logo aparece 3×)
+- `og:image` é removido: rastreadores não leem data URI
+
+Limitação: aberto por `file://`, o formulário de contato manda `Origin: null` e a API pode
+recusar. Publicado em HTTPS, funciona normalmente.
 
 ## Estrutura
 

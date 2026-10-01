@@ -12,7 +12,7 @@ import guilhermePhoto from '../assets/founders/guilherme-catto.jpg'
 import miguelPhoto from '../assets/founders/miguel-domingos.jpg'
 
 /** URL publica do dashboard/produto (projeto separado, ja em producao). */
-export const DASHBOARD_URL = 'https://apex-security-delta.vercel.app'
+export const DASHBOARD_URL = 'https://apex-security-kappa.vercel.app'
 
 /** Backend de contato reaproveitado do dashboard — nao existe backend proprio neste site. */
 export const CONTACT_ENDPOINT = 'https://apex-security-api.onrender.com/api/contact'
